@@ -1,0 +1,432 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html ; charset=utf-8" />
+		<link rel="stylesheet" title="Style par défaut" type="text/css" href="style.css" media="screen" />
+		<link rel="icon" type="image/png" href="favicon.png" />
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+		<title>Oyez ! Bienvenue à l’univers de l’OpenMindsClub !</title>
+	</head>
+	<body>
+		<div id="logo">
+		</div>
+		
+		<div class="sep sep_graywhite"></div>
+		<div id="presentation">
+			<div id="cadre_presentation">
+				<div id="text_presentation">
+					<h1>Oyez ! Bienvenue à l’univers de l’OpenMindsClub !</h1>
+					<p>Open Minds Club est un club scientifique de l'USTHB ayant comme slogan « Ce qui ne se partage se perd. ». C'est dans cette vision que le club travaille sur la promotion de l'esprit Open Source, et ce, à travers le partage de connaissances et le développement de l'esprit de collaboration entre les étudiants. Cet objectif se voit réalisé à travers l'organisation de ... : </p>
+				</div>
+			</div>
+		<div>
+		<div class="sep sep_whitegray"></div>
+		
+		<div id="threeindications">
+			<table><tr>
+				<td id="workshopes">
+					<div class="ind_icon"></div>
+					<h2>Formations et Ateliers</h2>
+					<p>Afin de concrétiser l'esprit de partage du club, des sessions de formations et d'ateliers y sont dispensés, par des étudiants souhaitant faire profiter leur savoir dans un quelconque domaine.</p>
+				</td>
+				<td id="projects">
+					<div class="ind_icon"></div>
+					<h2>Projets</h2>
+					<p>Le club encourage ses adhérents à réaliser des projets collaboratifs mettant en pratique, si possible, plusieurs spécialités.</p>
+				</td>
+				<td id="events">
+					<div class="ind_icon"></div>
+					<h2>Évènements</h2>
+					<p> Qui visent à impliquer des personnes externes au club (mais aussi à l'université) et partager ainsi avec eux, l’esprit du club.</p>
+				</td>
+			</tr></table>
+		</div>
+		<div class="sep sep_whitegray"></div>
+		
+		<div id="notes">
+			<div id="notes_content">
+				<p class="textinthemiddle">Afin d'assurer une bonne organisation du club, trois (3) départements ont été mis en place. A savoir :</p>	
+				<table>
+				<tr>
+					<td id="intern">
+						<div class="ind_icon"></div>
+						<h2>Communication interne</h2>
+					</td>
+					<td id="extern">
+						<div class="ind_icon"></div>
+						<h2>Communication externe</h2>
+					</td>
+					<td id="money">
+						<div class="ind_icon"></div>
+						<h2>Organisation des formations <br/>matériels et financiers</h2>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<ul>
+							<li>Assurer la bonne communication et la bonne entente entre les membres.</li>
+							<li>Assurer la communication de toute nouvelle aux membres concernés.</li>
+							<li>Assurer le bon déroulement du planning de la semaine.</li>
+						</ul>
+					</td>
+					<td>
+						<ul>
+							<li>Assurer la bonne communication des activités et une bonne publicité pour le club.</li>
+							<li>Contacter et garder une bonne relation avec les potentiels sponsors et autres clubs/organisations.</li>
+							<li>Assurer la rédaction d’articles pour le site et le magasine et la production du podcast.</li>
+						</ul>
+					</td>
+					<td>
+						<ul>
+							<li>Définir les besoins matériels et financiers du club.</li>
+							<li>Gérer le flux entrant et sortant du matériel.</li>
+							<li>Garder une trace de ce dernier.</li>
+						</ul>
+					</td>
+				</tr>
+				</table>
+				<p class="textinthemiddle">De plus, chaque événement ou projet aura sa propre équipe qui en sera totalement en charge</p>	
+			</div>
+		</div>
+		
+		<div class="sep sep_whitegray"></div>
+		
+		<div id="form">
+			<?php
+			if (@$_POST["subscribing"]) {
+				//Récupération des inputs
+				$name = @$_POST["name"];
+				$studentid = @$_POST["studentid"];
+				$birthday = @$_POST["birthday"];
+				$birthplace = @$_POST["birthplace"];
+				$sector = @$_POST["sector"];
+				$studyyear = @$_POST["studyyear"];
+				$hoursperweek = @$_POST["hoursperweek"];
+				$phone = trim(@$_POST["phone"]);
+				$email = @$_POST["email"];
+				
+				for ($i=1;$i<=8;$i++) $questions[$i] = @$_POST["qu".$i];
+				
+				//Analyse champ par champ
+				if (!$name)  $problem["name"] = 1;
+				else if (strlen($name)<3 || strlen($name)>40) $problem["name"] = 2;
+				
+				if (!$studentid)  $problem["studentid"] = 1;
+				else if (strlen($studentid)>12 || strlen($studentid)<5) $problem["studentid"] = 2;
+				
+				if (!$birthday)  $problem["birthday"] = 1;
+				else if (!is_numeric(str_replace("/","",$birthday)) || strlen($birthday)!=10)  $problem["birthday"] = 2;
+				
+				if (!$birthplace)  $problem["birthplace"] = 1;
+				else if (strlen($birthplace)<3 || strlen($birthplace)>40) $problem["birthplace"] = 2;
+				
+				if (!$sector)  $problem["sector"] = 1;
+				else if (strlen($sector)<3 || strlen($sector)>40) $problem["sector"] = 2;
+				
+				if (!$studyyear) $problem["studyyear"] = 1;
+				else if (!is_numeric($studyyear) || $studyyear<1 || $studyyear>8) $problem["studyyear"] = 2;
+				
+				if (!$hoursperweek) $problem["hoursperweek"] = 1;
+				else if (!is_numeric($hoursperweek) || $hoursperweek<1 || $hoursperweek>99) $problem["hoursperweek"] = 2;
+				
+				if (!$phone) $problem["phone"] = 1;
+				else if (!is_numeric($phone) || $phone[0]!="0" || strlen($phone)!==10) $problem["phone"] = 2;
+				
+				if (!$email) $problem["email"] = 1;
+				else if (!preg_match("#^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,5})$#i",$email) || strlen($email)>40) $problem["email"] = 2;
+				
+				for ($i=1;$i<=8;$i++) { 
+					if (!$questions[$i]) $problem["qu".$i] = 1;
+					else if (strlen($questions[$i])<10 || strlen($questions[$i])>500) $problem["qu".$i] = 2;
+				}
+				
+				if (!@$problem) { //Aucun problème, on peut commencer
+					//Antispam.
+					$ip = $_SERVER["REMOTE_ADDR"];
+					if (file_exists("antispam/".$ip.date("d-m-Y")) && strlen(file_get_contents("antispam/".$ip.date("d-m-Y")))>10) { //Empêcher l'IP de s'inscrire plus de 10 fois par jour.
+						$problem["toomuchsubtoday"] = 1;
+					} else {
+						mysql_connect("localhost","openmind_insc","LPpn(N^QUI#[");
+						mysql_select_db("openmind_inscriptions");
+						
+						$name = mysql_real_escape_string($name);
+						$studentid = mysql_real_escape_string($studentid);
+						$birthday = mysql_real_escape_string($birthday);
+						$birthplace = mysql_real_escape_string($birthplace);
+						$sector = mysql_real_escape_string($sector);
+						$studyyear = mysql_real_escape_string($studyyear);
+						$hoursperweek = mysql_real_escape_string($hoursperweek);
+						$phone = mysql_real_escape_string($phone);
+						$email = mysql_real_escape_string($email);
+						
+						for ($i=1;$i<=8;$i++) $questions[$i] = mysql_real_escape_string($questions[$i]);
+						
+						//Laisser une trace
+						$savetrace = fopen("antispam/".$ip.date("d-m-Y"),"a");
+						fputs($savetrace,"X");
+						fclose($savetrace);
+						
+						mysql_query("INSERT INTO subscriber_2014 VALUES ('', '$name', '$studentid', '$birthday', '$birthplace', '$sector', '$studyyear', '$phone', '$email', '$questions[1]', '$questions[2]', '$questions[3]', '$questions[4]', '$questions[5]', '$questions[6]', '$questions[7]', '$questions[8]', '$hoursperweek', '".time()."', '".$ip."')");
+
+						$success = true;
+					}
+				
+				}
+			}
+						
+			//Au cas où la même IP a effectué 10 inscriptions aujourd'hui
+			if (@$problem["toomuchsubtoday"]) {
+				?>
+					<div id="subscribingover">
+						<img src='media/stop.png' />
+						<h2 id="Subscribing" style="color:#f1593a;">Vous avez effectué trop d'inscriptions aujourd'hui. Revenez demain.</h2>
+					</div>
+				<?php
+			} else if (@$success) { // Au cas où l'inscription est terminée 
+				?>
+					<div id="subscribingover">
+						<img src='media/success.png' />
+						<h2 id="Subscribing" style="color:#007aff;">Félicitations ! Votre inscription a été validée !</h2>
+					</div>
+				<?php
+			} else {
+				?>
+				<h2 id="Subscribing">Inscrivez-vous à l'OpenMindsClub !</h2>
+				<div class="warning">
+					<p>Il est impératif pour tout étudiant souhaitant adhérer au club d'être affecté à un de ces départements.  Il est attendu de lui qu'il y accomplisse un minimum de tâches qui ne demandent qu'un minimum de temps, mais qui seront essentielles au bon fonctionement de tout le département.</p>
+				</div>
+				<form method="post" action="#Subscribing">
+					<input type="hidden" name="subscribing" value="1" />
+					<table id="subscribing">
+						<tr>
+							<td colspan="2"><h3>Vos informations</h3></td>
+						</tr>
+						<tr>
+							<td class="leftinput">
+								<?php
+								if (@$problem["name"]) {
+									switch($problem["name"]) {
+										case 1 : ?><p class="warningform">Veuillez fournir vos prénom(s) et nom</p><?php break;
+										case 2 : ?><p class="warningform">Vos prénom(s) et nom doivent faire entre 3 et 40 caractères</p><?php break;
+									}
+								}
+								?>
+								<input placeholder="Vos prénom(s) et nom" type="text" id="name" maxlength="40" name="name" value="<?php if (@$_POST["name"]) { echo stripslashes($_POST["name"]); } ?>" required/>
+							</td>
+							<td class="rightinput">
+								<?php
+								if (@$problem["studentid"]) {
+									switch($problem["studentid"]) {
+										case 1 : ?><p class="warningform">Veuillez fournir votre matricule</p><?php break;
+										case 2 : ?><p class="warningform">Veuillez fournir un matricule valide.</p><?php break;
+									}
+								}
+								?>
+								<input placeholder="Votre matricule" type="text" id="studentid" maxlength="12" name="studentid" value="<?php if (@$_POST["studentid"]) { echo stripslashes($_POST["studentid"]); } ?>" required/>
+							</td>
+						</tr>
+						<tr>
+							<td class="leftinput">
+								<?php
+								if (@$problem["birthday"]) {
+									switch($problem["birthday"]) {
+										case 1 : ?><p class="warningform">Veuillez fournir votre date de naissance</p><?php break;
+										case 2 : ?><p class="warningform">Votre date de naissance à un format incorrect (JJ/MM/AAAA).</p><?php break;
+									}
+								}
+								?>
+								<input placeholder="Année de naissance (format JJ/MM/AAAA)" type="text" id="birthday" maxlength="10" name="birthday" value="<?php if (@$_POST["birthday"]) { echo stripslashes($_POST["birthday"]); } ?>" required/>
+							</td>
+							<td class="rightinput">
+								<?php
+								if (@$problem["birthplace"]) {
+									switch($problem["birthplace"]) {
+										case 1 : ?><p class="warningform">Veuillez fournir votre lieu de naissance</p><?php break;
+										case 2 : ?><p class="warningform">Votre lieu de naissance doit faire entre 3 et 40 caractères</p><?php break;
+									}
+								}
+								?>
+								<input placeholder="Lieu de naissance" type="text" id="birthplace" maxlength="40" name="birthplace" value="<?php if (@$_POST["birthplace"]) { echo stripslashes($_POST["birthplace"]); } ?>" required/>
+							</td>
+						</tr>
+						<tr>
+							<td class="leftinput">
+								<?php
+								if (@$problem["studyyear"]) {
+									switch($problem["studyyear"]) {
+										case 1 : ?><p class="warningform">Veuillez fournir votre année d'étude</p><?php break;
+										case 2 : ?><p class="warningform">Donnée inattendue.</p><?php break;
+									}
+								}
+								?>
+								<select name="studyyear">
+									<optgroup label="Année d'étude"></optgroup>
+									<option <?php if (@$_POST["studyyear"] == 1) echo "selected"; ?> value="1">1ère année Licence</option>
+									<option <?php if (@$_POST["studyyear"] == 2) echo "selected"; ?> value="2">2éme année Licence</option>
+									<option <?php if (@$_POST["studyyear"] == 3) echo "selected"; ?> value="3">3éme année Licence</option>
+									<option <?php if (@$_POST["studyyear"] == 4) echo "selected"; ?> value="4">1ère année Master</option>
+									<option <?php if (@$_POST["studyyear"] == 5) echo "selected"; ?> value="5">2éme année Master</option>
+									<option <?php if (@$_POST["studyyear"] == 6) echo "selected"; ?> value="6"> 1ère année Doctorat</option>
+									<option <?php if (@$_POST["studyyear"] == 7) echo "selected"; ?> value="7">2éme année Doctorat</option>
+									<option <?php if (@$_POST["studyyear"] == 8) echo "selected"; ?> value="8">3éme année Doctorat</option>
+								</select>
+							</td>
+							<td class="rightinput">
+								<?php
+								if (@$problem["sector"]) {
+									switch($problem["sector"]) {
+										case 1 : ?><p class="warningform">Veuillez fournir votre filière d'étude</p><?php break;
+										case 2 : ?><p class="warningform">Votre filière d'étude doit faire entre 3 et 40 caractères</p><?php break;
+									}
+								}
+								?>
+								<input placeholder="Filière d'étude" type="text" id="sector" maxlength="40" name="sector" value="<?php if (@$_POST["sector"]) { echo stripslashes($_POST["sector"]); } ?>" required/>
+							</td>
+						</tr>
+						<tr>
+							<td class="leftinput">
+								<?php
+								if (@$problem["phone"]) {
+									switch($problem["phone"]) {
+										case 1 : ?><p class="warningform">Veuillez fournir votre numéro de téléphone</p><?php break;
+										case 2 : ?><p class="warningform">Veuillez saisir un numéro de téléphone valide (0XXXXXXXXX)</p><?php break;
+									}
+								}
+								?>
+								<input placeholder="Numéro de téléphone" type="text" id="phone" maxlength="10" name="phone" value="<?php if (@$_POST["phone"]) { echo stripslashes($_POST["phone"]); } ?>" required/>
+							</td>
+							<td class="rightinput">
+								<?php
+								if (@$problem["email"]) {
+									switch($problem["email"]) {
+										case 1 : ?><p class="warningform">Veuillez fournir votre adresse email</p><?php break;
+										case 2 : ?><p class="warningform">Veuillez saisir une adresse email valide</p><?php break;
+									}
+								}
+								?>
+								<input placeholder="Adresse email" type="email" id="email" maxlength="40" name="email" value="<?php if (@$_POST["email"]) { echo stripslashes($_POST["email"]); } ?>" required/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="2"><h3>Votre façon de penser</h3></td>
+						</tr>
+						<tr>
+							<td>
+								<?php
+								if (@$problem["qu1"]) {
+									switch($problem["qu1"]) {
+										case 1 : ?><p class="warningform">Veuillez répondre à cette question.</p><?php break;
+										case 2 : ?><p class="warningform">Votre réponse doit faire entre 10 et 500 caractères.</p><?php break;
+									}
+								}
+								?>
+								<textarea placeholder="Que connaissez-vous de l'univers Open-Source ?" name="qu1" required><?php if (@$_POST["qu1"]) { echo stripslashes($_POST["qu1"]); } ?></textarea>
+							<td>
+								<?php
+								if (@$problem["qu2"]) {
+									switch($problem["qu2"]) {
+										case 1 : ?><p class="warningform">Veuillez répondre à cette question.</p><?php break;
+										case 2 : ?><p class="warningform">Votre réponse doit faire entre 10 et 500 caractères.</p><?php break;
+									}
+								}
+								?>
+								<textarea placeholder="Qu'en pensez-vous ?" name="qu2" required><?php if (@$_POST["qu2"]) { echo stripslashes($_POST["qu2"]); } ?></textarea>
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="2"><h3>Votre dévouement au club</h3></td>
+						</tr>
+						<tr>
+							<td>
+								<?php
+								if (@$problem["qu3"]) {
+									switch($problem["qu3"]) {
+										case 1 : ?><p class="warningform">Veuillez répondre à cette question.</p><?php break;
+										case 2 : ?><p class="warningform">Votre réponse doit faire entre 10 et 500 caractères.</p><?php break;
+									}
+								}
+								?>
+								<textarea placeholder="Comment avez-vous entendu parler du Club ?" name="qu3" required><?php if (@$_POST["qu3"]) { echo stripslashes($_POST["qu3"]); } ?></textarea>
+							</td>
+							<td>
+								<?php
+								if (@$problem["qu4"]) {
+									switch($problem["qu4"]) {
+										case 1 : ?><p class="warningform">Veuillez répondre à cette question.</p><?php break;
+										case 2 : ?><p class="warningform">Votre réponse doit faire entre 10 et 500 caractères.</p><?php break;
+									}
+								}
+								?>
+								<textarea placeholder="Que connaissez-vous du club?" name="qu4" required><?php if (@$_POST["qu4"]) { echo stripslashes($_POST["qu4"]); } ?></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<?php
+								if (@$problem["qu5"]) {
+									switch($problem["qu5"]) {
+										case 1 : ?><p class="warningform">Veuillez répondre à cette question.</p><?php break;
+										case 2 : ?><p class="warningform">Votre réponse doit faire entre 10 et 500 caractères.</p><?php break;
+									}
+								}
+								?>
+								<textarea placeholder="Quels sont vos motivations pour y adhérer ?" name="qu5" required><?php if (@$_POST["qu5"]) { echo stripslashes($_POST["qu5"]); } ?></textarea>
+							</td>
+							<td>
+								<?php
+								if (@$problem["qu6"]) {
+									switch($problem["qu6"]) {
+										case 1 : ?><p class="warningform">Veuillez répondre à cette question.</p><?php break;
+										case 2 : ?><p class="warningform">Votre réponse doit faire entre 10 et 500 caractères.</p><?php break;
+									}
+								}
+								?>
+								<textarea placeholder="Que pensez-vous apporter de plus au club ?" name="qu6" required><?php if (@$_POST["qu6"]) { echo stripslashes($_POST["qu6"]); } ?></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<?php
+								if (@$problem["qu7"]) {
+									switch($problem["qu7"]) {
+										case 1 : ?><p class="warningform">Veuillez répondre à cette question.</p><?php break;
+										case 2 : ?><p class="warningform">Votre réponse doit faire entre 10 et 500 caractères.</p><?php break;
+									}
+								}
+								?>
+								<textarea placeholder="Listez les compétences que vous pourrez avoir, dans différents domaines confondus" name="qu7" required><?php if (@$_POST["qu7"]) { echo stripslashes($_POST["qu7"]); } ?></textarea>
+							</td>
+							<td>
+								<?php
+								if (@$problem["qu8"]) {
+									switch($problem["qu8"]) {
+										case 1 : ?><p class="warningform">Veuillez répondre à cette question.</p><?php break;
+										case 2 : ?><p class="warningform">Votre réponse doit faire entre 10 et 500 caractères.</p><?php break;
+									}
+								}
+								?>
+								<textarea placeholder="Dans quel département vous voyez-vous ?" name="qu8" required><?php if (@$_POST["qu8"]) { echo stripslashes($_POST["qu8"]); } ?></textarea>
+							</td>
+						</tr>
+					</table>
+					<?php
+						if (@$problem["hoursperweek"]) {
+							switch($problem["hoursperweek"]) {
+								case 1 : ?><p class="warningform">Veuillez répondre à cette question.</p><?php break;
+								case 2 : ?><p class="warningform">Votre réponse doit être entre 1 et 99heures.</p><?php break;
+							}
+						}
+						?>
+					<input style="width:780px;" placeholder="Combien d'heures par semaine pourriez-vous consacrer au club ?" type="text" id="hoursperweek" maxlength="2" name="hoursperweek" value="<?php if (@$_POST["hoursperweek"]) { echo stripslashes($_POST["hoursperweek"]); } ?>" required/>
+					<input type="submit" value="Envoyer la demande d'inscription au club"/>
+				
+					
+				</form>
+			<?php
+			}
+			?>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,7 @@
+# sudo apt-get install libpng-dev libjpeg8-dev libfreetype6-dev zlib1g-dev
+django
+Image
+django-widget-tweaks
+pillow
+PIL
+markdown

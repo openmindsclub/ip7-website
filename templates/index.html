@@ -1,0 +1,125 @@
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+	<head>	
+		<meta name="author" content="Samy Melaine">
+		<meta http-equiv="Content-Type" content="text/html ; charset=utf-8" />
+		<link rel="stylesheet" title="Style par défaut" type="text/css" href="{% static 'style.css' %}" />
+		<!-- <link rel="stylesheet" type="text/css" href="bootstrap.min.css" /> -->
+		<link rel="icon" type="image/png" href="favicon.png" />
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+		<title>PI Day !</title>
+	</head>
+	<body>
+		<div align=center>
+			<image src="{% static 'media/logo.png' %}" style="height:200px" align=center /> 
+					<h1><big>Organisent pour la première fois en Algérie</big></h1>
+		</div>
+		
+
+		<div id="presentation" align=center>
+			<div id="cadre_presentation">
+<br>
+					<image src="{% static 'media/piday-logo.png'%}" style="height:500px"/>
+			</div>
+
+		
+		<div id="form">
+
+<!--			
+					<div id="subscribingover">
+						<img src="{% static 'media/success.png'%}" />
+						<h2 id="Subscribing" style="color:#007aff;">Félicitations ! Votre inscription a été validée !</h2>
+					</div>
+-->
+
+
+
+				<h1 id="Subscribing">Inscrivez-vous à l'évènement !</h1>
+				<form method="post" action="/subscription"> {% csrf_token %}
+					<input type="hidden" name="subscribing" value="1" />
+					<table id="subscribing">
+						<tr>
+							<td class="leftinput">
+								{{ form.familyname }}
+							</td>
+							<td class="rightinput">
+								{{ form.firstname }}
+							</td>
+						</tr>
+						<tr>
+							<td class="leftinput">
+								{{ form.email }}
+							</td>
+							<td class="rightinput">
+								<input placeholder=" Confirmez votre email" type="text" id="studentid" maxlength="12" name="studentid" value=""/>
+							</td>
+						</tr>
+					</table>
+								{{ form.occupation }}
+					<input type="submit" value="Envoyer la demande d'inscription"/>
+					<br><br>
+					
+				</form>
+
+		</div>
+
+
+ 		<div id="form" ><h3> Ingénieurs, mathématiciens, informaticiens, physiciens … Vous avez tous un point un commun « <big>mathematics</big> ». Ne ratez donc surtout pas l’EVENEMENT qui vous lie. <br> Ce <big>samedi 14 mars</big> aura lieu pour la première fois en Algérie "<big>PI day</big>", célébrons le tous ensemble !</h3></div>
+		<div>
+
+
+
+		<div id="threeindications">
+			<table><tr>
+				<td id="conf">
+					<div class="ind_icon"></div>
+					<h2>Assistez aux conférences</h2>
+					<p>C'est bien d'assister aux conférences. Il est presque 5h du matin ... J'arrives plus à penser. Des idées sur le text que je pourrais mettre ici?</p>
+				</td>
+				<td id="gift">
+					<div class="ind_icon"></div>
+					<h2>Gagnez des cadeaux</h2>
+					<p>Oui oui, il y aura des cadeaux à gagner. J'aurais besoin d'aide pour remplire ces champs.</p>
+				</td>
+				<td id="pie">
+					<div class="ind_icon"></div>
+					<h2>Apportez vos tartes</h2>
+					<p>Qui a parlé le collation dèja? On pourrait peut-etre la faire sans sponsors vous en dites quoi. Chacun (ou presque) apporte une tarte.</p>
+				</td>
+			</tr></table>
+		</div>
+		<div class="sep sep_whitegray"></div>
+		
+		<div id="notes">
+			<div id="notes_content">
+				<br>
+				<table>
+				<tr>
+					<td id="intern">
+						<h2>Club Open Minds</h2>
+					</td>
+					<td id="money">
+						<h2>Club d'acvitivé polyvalentes</h2>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="http://www.openmindsclub.org">www.openmindsclub.org</a>
+						<br/><a href='https://www.facebook.com/openmindsclub'><img src="{% static 'media/facebook.png'%}" alt='Facebook'/></a><a href='https://twitter.com/clubopenminds'><img src="{% static 'media/twitter.png'%}" alt='Twitter'/></a>
+					</td>
+					<td>
+						<a href="http://www.capenp.com">www.capenp.com</a>
+						<br/><a href='https://www.facebook.com/CAP.ENP'><img src="{% static 'media/facebook.png'%}" alt='Facebook'/></a><a href='https://twitter.com/CAPENP'><img src="{% static 'media/twitter.png'%}" alt='Twitter'/></a>
+					</td>
+				</tr>
+				</table>
+			
+				<div float=left><p class="textinthemiddle"> © 2015 - Open Minds Club - Samy Melaine </p></div>
+			</div>
+		</div>
+		
+	</body>
+</html>

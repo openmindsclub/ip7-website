@@ -1,0 +1,7 @@
+from django.contrib import admin
+from .models import Subscribe
+
+class Sub(admin.ModelAdmin):
+	list_display = ('email',)
+
+admin.site.register(Subscribe,Sub)
